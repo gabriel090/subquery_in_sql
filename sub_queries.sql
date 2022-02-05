@@ -61,7 +61,26 @@ select *
 from department d
 where not exists (select 1 from employee e where e.dept_name = d.dept_name);
 
+---------NESTED SUBQUERY
+---Subquery inside a subquery
+--QUESTION: Find stores who's sales where better than the average sales
+--across all stores
+select * from sales;
+--Break the question into different parts
+--1) find the total sales for each store.
+--2) find avg sales for all the stores
+--3)compare 1 &2
 
+select *
+from  (select store_name, sum(price) as total_sales
+from sales 
+group by store_name) sales
+
+join (select avg(total_sales) as sales
+from (select store_name, sum(price) as total_sales
+    from sales 
+    group by store_name) x) avg_sales
+on sales.total_sales > avg_sales.sales;
 
 
 
