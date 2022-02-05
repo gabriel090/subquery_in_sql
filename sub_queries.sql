@@ -18,3 +18,17 @@ select *
 from employees e
 join (select avg(salary) sal from employees) avg_sal
     on e.salary > avg_sal.sal;
+-- multiple row subquery
+-- subquery which returns multiple column and multiple row
+-- subquery which returns only 1 column and multiple rows
+--QUESTION: Find the employees who earn the highest in each department
+
+select dept_name, max(salary)
+from employees
+group by dept_name
+
+select * from employees
+where (dept_name,salary) in (
+    select dept_name, max(salary)
+            from employees
+            group by dept_name)
