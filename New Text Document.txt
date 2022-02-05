@@ -1,0 +1,2 @@
+What is a sub-query? How does sql process a statement containing sub-query?
+/*Question: Find the employees who's salary is more than the average salary earned by all employees
