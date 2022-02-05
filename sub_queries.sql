@@ -31,4 +31,15 @@ select * from employees
 where (dept_name,salary) in (
     select dept_name, max(salary)
             from employees
-            group by dept_name)
+            group by dept_name);
+
+
+--- Single column, multiple row subquery
+---Question: find department who do not have any employee
+
+select * 
+from department
+where dept_name not in (select distinct dept_name
+from employee);
+
+
