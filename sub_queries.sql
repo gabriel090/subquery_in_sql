@@ -42,4 +42,27 @@ from department
 where dept_name not in (select distinct dept_name
 from employee);
 
+--Correlated subqury
+--subquery which is related to the outer query
+-- Question: Find the employees in each department who earn more than the average salary
+
+select avg(salary) 
+from employees 
+where dept_name = 
+
+select *
+from employees e1
+where salary > (select avg(salary) 
+            from employees e2
+            where e1.dept_name = e2.dept_name);
+--QUESTION: Find department who do not have any employees
+
+select *
+from department d
+where not exists (select 1 from employee e where e.dept_name = d.dept_name);
+
+
+
+
+
 
