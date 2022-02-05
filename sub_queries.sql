@@ -82,6 +82,24 @@ from (select store_name, sum(price) as total_sales
     group by store_name) x) avg_sales
 on sales.total_sales > avg_sales.sales;
 
+-- Different SQL Clause Where subquery is allowed
+
+--Using a subquery in select clause
+--Question: Fetch all employee details and add remark to those employees who earn more than the average pay
+
+select *
+,(case when salary > (select avg(salary)from employees)
+            then 'Higher than average'
+            else null
+        end) as remarks
+from employees
 
 
 
+select *
+, (case when salary > avg_sal.sal
+        then 'Higher than average'
+    else null
+end) as remarks
+from employees
+cross join (select avg(salary) sal from employees) avg_sal;
