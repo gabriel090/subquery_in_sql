@@ -103,3 +103,19 @@ select *
 end) as remarks
 from employees
 cross join (select avg(salary) sal from employees) avg_sal;
+
+
+--Having clause
+--Question: Find the store who have sold more units than the average units sold by all stores
+
+select store_name, sum(quantity)
+from sales
+group by store_name
+having sum(quantity) > (select avg(quantity) from sales)
+
+
+
+
+
+
+
