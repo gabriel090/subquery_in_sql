@@ -113,6 +113,26 @@ from sales
 group by store_name
 having sum(quantity) > (select avg(quantity) from sales)
 
+---SQL Commands which allow subquery
+
+--INSERT
+--UPDATE
+--DELETE
+
+--INSERT
+--Question: Insert data to employee history table. Make sure not to insert duplicate 
+select * from employee_history
+
+insert into employee_history
+select e.emp_id,e.emp_name,d.dept_name,e.salary, d.location
+from employee e
+join department d on d.dept_name = e.dept_name
+where not exists (select 1
+        from employee_history eh 
+        where eh.emp_id = e.emp_id);
+
+
+
 
 
 
