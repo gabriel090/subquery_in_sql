@@ -146,6 +146,14 @@ where e.dept_name in (select dept_name
                 where location ='Bangalore')
 and e.emp_id in (select emp_id from employee_history);
 
+-----DELETE
+--Question: Delete all department who do not have any employees
+delete from department
+where dept_name in (select dept_name
+                    from department d 
+                    where not exists (select 1
+                            from employee e 
+                            where e.dept_name = d.dept_name));
 
 
 
