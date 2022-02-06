@@ -132,6 +132,20 @@ where not exists (select 1
         where eh.emp_id = e.emp_id);
 
 
+---UPDATE
+--- QUESTION: gIVE 10% INCREMENT TO ALL EMPLOYEES IN bANGALORE LOCATION BASED ON THE MAXIMUM SALARY EARNED BY AN EMP IN EACH DEPT. ONLY CONSIDER EMPLOYEES IN EMPLOYEE_HISTORY TABLE
+
+
+update employee e 
+set salary = (select max(salary) + (max(salary)*0.1)
+                from employee_history eh 
+                where eh.dept_name = e.dept_name
+                )
+where e.dept_name in (select dept_name
+                from department
+                where location ='Bangalore')
+and e.emp_id in (select emp_id from employee_history);
+
 
 
 
